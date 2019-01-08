@@ -15,6 +15,7 @@
         "servertype": "openocd",
         "cwd": "${workspaceRoot}",
         "executable": "./GRBL_Advanced.elf",
+        "svdFile": "${workspaceFolder}/STM32F303xE.svd",
         "name": "Debug (OpenOCD)",
         "device": "STM32F303RE",
         "configFiles": [
