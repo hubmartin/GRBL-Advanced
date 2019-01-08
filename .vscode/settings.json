@@ -1,0 +1,25 @@
+{
+    "C_Cpp.default.includePath": [
+        "${workspaceFolder}/app",
+        "${workspaceFolder}/sdk/bcl/inc",
+        "${workspaceFolder}/sdk/bcl/stm/inc",
+        "${workspaceFolder}/sdk/sys/inc",
+        "${workspaceFolder}/sdk/stm/spirit1/inc",
+        "${workspaceFolder}/sdk/stm/hal/inc",
+        "${workspaceFolder}/sdk/stm/usb/inc",
+        "${default}"
+      ],
+    "C_Cpp.default.browse.path": [
+        "${workspaceFolder}/app",
+        "${workspaceFolder}/sdk/bcl",
+        "${workspaceFolder}/sdk/sys",
+        "${workspaceFolder}/sdk/stm",
+        "${default}"
+    ],
+    "C_Cpp.default.cStandard": "c11",
+    "files.associations": {
+        "exti.h": "c",
+        "stm32f30x_exti.h": "c",
+        "stm32f4xx_rcc.h": "c"
+    }
+}

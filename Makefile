@@ -22,18 +22,21 @@ SIZE		=	arm-none-eabi-size
 #---------------------------------------------------------------------------------
 TARGET		:=	GRBL_Advanced
 BUILD       :=	build
-SOURCES		:=	./ cmsis/ grbl/ HAL/ HAL/EXTI HAL/FLASH HAL/GPIO HAL/SPI HAL/STM32 HAL/TIM HAL/USART SPL/src Src/
+#SOURCES		:=	./ cmsis/ grbl/ HAL/ HAL/EXTI HAL/FLASH HAL/GPIO HAL/SPI HAL/STM32 HAL/TIM HAL/USART SPL/src Src/
+SOURCES		:=	./ cmsis/ grbl/ HAL_F3/ HAL_F3/EXTI HAL_F3/FLASH HAL_F3/GPIO HAL_F3/SPI HAL_F3/STM32F3 HAL_F3/TIM HAL_F3/USART SPL_F3/src Src/
 
-INCLUDES    :=	$(SOURCES) SPL/inc
+INCLUDES    :=	$(SOURCES) SPL_F3/inc
 
 #---------------------------------------------------------------------------------
 # options for code generation
 #---------------------------------------------------------------------------------
 FLAGS       := 	-mfloat-abi=hard -mcpu=cortex-m4 -gdwarf-2 -mfpu=fpv4-sp-d16 -mthumb
-CFLAGS      := 	-O2 -g1 -std=c99 -Wall -Wextra $(INCLUDE) -fno-common -fsingle-precision-constant -fdata-sections -ffunction-sections -fomit-frame-pointer -mlittle-endian  -DUSE_STDPERIPH_DRIVER -DSTM32F411xE -DSTM32F411RE -D__FPU_USED -DARM_MATH_CM4
+#CFLAGS      := 	-O2 -g1 -std=c99 -Wall -Wextra $(INCLUDE) -fno-common -fsingle-precision-constant -fdata-sections -ffunction-sections -fomit-frame-pointer -mlittle-endian  -DUSE_STDPERIPH_DRIVER -DSTM32F411xE -DSTM32F411RE -D__FPU_USED -DARM_MATH_CM4
+CFLAGS      := 	-O2 -g1 -std=c99 -Wall -Wextra $(INCLUDE) -fno-common -fsingle-precision-constant -fdata-sections -ffunction-sections -fomit-frame-pointer -mlittle-endian -DUSE_STDPERIPH_DRIVER -DSTM32F303xE -D__FPU_USED -DARM_MATH_CM4
 CXXFLAGS    :=  $(CFLAGS)
 
-LDFLAGS		:=	-lm -flto -Wl,--gc-sections -T../stm32f411re_flash.ld -Wl,-M=$(OUTPUT).map --specs=nosys.specs -nostartfiles
+#LDFLAGS		:=	-lm -flto -Wl,--gc-sections -T../stm32f411re_flash.ld -Wl,-M=$(OUTPUT).map --specs=nosys.specs -nostartfiles
+LDFLAGS		:=	-lm -flto -Wl,--gc-sections -T../STM32F303VE_FLASH.ld -Wl,-M=$(OUTPUT).map --specs=nosys.specs -nostartfiles
 
 #---------------------------------------------------------------------------------
 # any extra libraries we wish to link with the project

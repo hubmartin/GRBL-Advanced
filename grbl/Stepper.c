@@ -220,8 +220,8 @@ void Stepper_Init(void)
 	// Configure step and direction interface pins
 	GPIO_InitGPIO(GPIO_STEPPER);
 
-	// Init TIM9
-	TIM9_Init();
+	// Init TIM_Stepper
+	TIM_Stepper_Init();
 }
 
 
@@ -242,7 +242,7 @@ void Stepper_WakeUp(void)
 	st.step_outbits = 0;
 
 	// Enable Stepper Driver Interrupt
-	TIM_Cmd(TIM9, ENABLE);
+	TIM_Stepper_Enable();
 }
 
 
@@ -250,7 +250,7 @@ void Stepper_WakeUp(void)
 void Stepper_Disable(void)
 {
 	// Disable Stepper Driver Interrupt.
-	TIM_Cmd(TIM9, DISABLE);
+	TIM_Stepper_Disable();
 	Delay_us(1);
 
 	// Reset stepper pins
@@ -371,8 +371,8 @@ void Stepper_MainISR(void)
 				st.exec_segment->cycles_per_tick = STEP_TIMER_MIN;
 			}
 
-			TIM9->ARR = st.exec_segment->cycles_per_tick;
-			TIM9->CCR1 = (uint16_t)(st.exec_segment->cycles_per_tick * 0.75);
+			TIM_Stepper_Set_Autoreload(st.exec_segment->cycles_per_tick);
+			TIM_Stepper_Set_Compare((uint16_t)(st.exec_segment->cycles_per_tick * 0.75));
 			st.step_count = st.exec_segment->n_step; // NOTE: Can sometimes be zero when moving slow.
 
 			// If the new segment starts a new planner block, initialize stepper variables and counters.

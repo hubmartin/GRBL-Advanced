@@ -3,3 +3,7 @@ obj/*
 *.depend
 *.layout
 grbl-master
+build/*
+*.elf
+*.lst
+*.map
